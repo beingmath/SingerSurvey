@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+		<mvc:annotation-driven/><!-- springmvc基本注解，和下面的注解一起使用可以用来处理静态资源
+			 -->
+	<mvc:default-servlet-handler/><!-- 让springmvc在接到一个请求没找到相应的requestMapping，会将该请求交给tomcat处理（处理静态资源，比如图片） -->
+	<context:component-scan base-package="action"/>
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/" mapping="/*.html"/>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	</bean>
+	<!--数据格式化  -->
+	<bean id="conversion" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"></bean>
+	<!--不使用控制器直接跳到页面  
+	<mvc:view-controller path="straight" view-name="success.jsp"/>
+	-->
+</beans>
